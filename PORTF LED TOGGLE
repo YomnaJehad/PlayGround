@@ -11,7 +11,7 @@
 
 // Prototypes
 void initPortF(void);
-void delay(unsigned int param);
+void delay_(unsigned int param);
 
 void setup() {
   // put your setup code here, to run once:
@@ -22,7 +22,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   GPIO_PORTF_DATA_R ^= 0x04;   // Toggle LED on/off
-        delay_(100);   
+        delay(1000);   
   
 }
 
