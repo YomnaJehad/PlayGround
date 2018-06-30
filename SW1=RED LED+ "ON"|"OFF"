@@ -112,6 +112,14 @@ void GPIOPortF_Handler(void) {
 
   GPIO_PORTF_ICR_R = 0x10; //ack flag4
   GPIO_PORTF_DATA_R ^= 0x02;
+  UART0_Write('P');
+  UART0_Write('R');
+  UART0_Write('E');
+  UART0_Write('S');
+  UART0_Write('S');
+  UART0_Write('E');
+  UART0_Write('D');
+    
   if(LEDSTATE==0){
     UART0_Write('O');
     UART0_Write('N');
