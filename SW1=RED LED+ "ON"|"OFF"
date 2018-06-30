@@ -54,7 +54,9 @@
 // Prototypes
 void initPortF(void);
 void UART0_Init(void);
+void UART0_Write(char c);
 
+int LEDSTATE=0;
 int main(void) {
   initPortF();                     // Initialize PortF
   UART0_Init();
@@ -110,6 +112,17 @@ void GPIOPortF_Handler(void) {
 
   GPIO_PORTF_ICR_R = 0x10; //ack flag4
   GPIO_PORTF_DATA_R ^= 0x02;
+  if(LEDSTATE==0){
+    UART0_Write('O');
+    UART0_Write('N');
+    LEDSTATE=1;
+    }
+  else{
+    UART0_Write('O');
+    UART0_Write('F');
+    UART0_Write('F');
+    LEDSTATE=0;
+    }
 
 
 }
@@ -126,5 +139,11 @@ void UART0_Init(void)  {
   //UART0_CTL_R= 0x301; //enable RXE, TXE and UART
   UART0_CTL_R= (1<<0)|(1<<8)|(1<<9);
 //  SYSCTL_RCGCGPIO_R |= 0x1; //Activate port A
+  
+  }
+void UART0_Write(char c){
+  
+  while((UART0_FR_R&0x0020)!=0); //wait until TXFF is 0
+  UART0_DR_R= c;
   
   }
